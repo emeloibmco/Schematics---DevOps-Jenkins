@@ -32,7 +32,7 @@ Como se puede ver se deben añadir las credenciales del usuario en GitHub y lueg
 
 Para añadir las credenciales de la cuenta de GitHub se debe rellenar la información de **Username** y **Password** como se muestra en la siguiente imagen:
 
-<img width="545" alt="workspace" src="Assets/gitgub-credentials.JPG">
+<img width="545" alt="workspace" src="Assets/github-credentials.JPG">
 
 Una vez creado el proyecto se puede observar un _DASHBOARD_ como aparece en la siguiente imagen:
 
