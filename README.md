@@ -58,7 +58,7 @@ pipeline {
     stages {
         stage('DevOps Schematics') {
             steps {
-                echo 'Building..'
+                
             }
         }
         
