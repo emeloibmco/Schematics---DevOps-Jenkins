@@ -2,7 +2,7 @@
 
 En esta guía encontrará una descripción detallada sobre DevOps con Jenkins en la herrarmienta Schematcis para automatización de Infraestructura
 
-<img width="700" alt="workspace" src="Assets/architecture.png"> 
+<img width="700" alt="workspace" src="Assets/architecture1.jpeg"> 
 
 ## 1. Jenkins
 
