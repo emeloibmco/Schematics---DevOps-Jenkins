@@ -39,6 +39,15 @@ Una vez alli se observa el _DASHBOARD_ del **master** como se observa a continua
 
 <img width="545" alt="dash_workspace" src="Assets/dash-master.JPG">
 
+Para ejecutar el PIPELINE se selecciona **Build with Paramenters**, luego de ello aparecerán los parametros requeridos como se muestra a continuación:
+
+<img width="545" alt="dash_workspace" src="Assets/select_os.JPG">
+
+Se debe selecciónar el sistema operito sobre el cual la herramienta Jenkins esta instalado. Tambien se debe ingresar el IAM Token el cual se obtiene con el siguiente comando:
+```
+ibmcloud iam oauth-tokens
+```
+
 ## 3. Jenkisfile :page_with_curl:	
 
 La estructura de código del archivo Jenkinsfile consta de 
