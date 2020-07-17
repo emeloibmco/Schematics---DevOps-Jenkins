@@ -5,75 +5,76 @@ En esta guía encontrará una descripción detallada sobre DevOps con Jenkins en
 <img width="545" alt="workspace" src="Assets/architecture.png"> 
 
 
-## 1.[Jenkins](https://www.jenkins.io/doc/)
+## 1. Jenkins
 
 Jenkins es un servidor de automatización de código abierto autónomo que se puede utilizar para automatizar todo tipo de tareas relacionadas con la creación, prueba y entrega o implementación de software. Jenkins se puede instalar a través de paquetes del sistema nativo, Docker, o incluso ejecutarse de forma independiente en cualquier máquina que tenga instalado un Java Runtime Environment (JRE). 
 
 ### Archivos :bookmark_tabs:
 
-Para el uso de DevOps en Schematics se tiene el archivo Jenkinsfile.
+Para el uso de DevOps en Schematics se desarrollo el archivo Jenkinsfile para ejecución de tareas desde Jenkins.
 
-- Jenkinsfile
+- Jenkinsfile :file_folder:
 
-### Archivos :bookmark_tabs:
-
-La ejecución de la tarea DevOps, requiere de la selección del sistema operativo donde la herramienta Jenkins está configurada. El sistema operativo por defecto es Windows, sin embargo se debe especificar si se tiene el Jenkins configurado en Linux a la hora de ejecutar la tarea, como se muestra en la siguiente imagen:
-
-<img width="545" alt="workspace" src="Assets/select_os.JPG"> 
-
-## 2. Configuración del proyecto en Jenkins
+## 2. Configuración del proyecto en Jenkins :computer:
 
 La configuración en de la tarea en DevOps requiere de la creación de un proyecto **Multibranch Pipeline** para la configuraciónde un repositorio Github el cual contendrá el archivo Jenkinsfile para ejecutar la tarea.
+
+<img width="545" alt="item" src="Assets/create-item.JPG">
+
 Una vez creado el proyecto **Multibranch Pipeline** se procede a hacer la configuración de _Branch Sources_ como aparece en la siguiente imagen:
 
-<img width="545" alt="workspace" src="Assets/set-credentials.JPG"> 
+<img width="545" alt="cred" src="Assets/set-credentials.JPG"> 
 
 Como se puede ver se deben añadir las credenciales del usuario en GitHub y luego de ello al ingresar la dirección del repositorio en GitHub, se debe tener la confirmación de las credenciales.
 
 Para añadir las credenciales de la cuenta de GitHub se debe rellenar la información de **Username** y **Password** como se muestra en la siguiente imagen:
 
-<img width="545" alt="workspace" src="Assets/github-credentials.JPG">
+<img width="545" alt="github credentials" src="Assets/github-credentials.JPG">
 
 Una vez creado el proyecto se puede observar un _DASHBOARD_ como aparece en la siguiente imagen:
 
-<img width="545" alt="workspace" src="Assets/dash-jenkins.JPG">
+<img width="545" alt="dash_jenkins" src="Assets/dash-jenkins.JPG">
 
 En donde se selecciona el **commit** master que contiene el archivo Jenkinsfile para la ejecución de tareas.
 Una vez alli se observa el _DASHBOARD_ del **master** como se observa a continuación:
 
-<img width="545" alt="workspace" src="Assets/dash-master.JPG">
+<img width="545" alt="dash_workspace" src="Assets/dash-master.JPG">
 
-## 3. Despliegue en Schematics :wrench: 
+## 3. Jenkisfile :page_with_curl:	
 
-Se debe dirigir al simbolo de menú en donde encontrará la opción de **Schematics** una vez alli se creará un nuevo workspace donde se contará con la siguiente pestaña:
-
-<img width="545" alt="workspace" src="images/workspace.JPG"> 
-
-Para la configuración de la SSH Keys se debe abrir la terminar del PC en ingresar el comando 
-```sh
-ssh-keygen -m PEM -t rsa -f <NOMBRE_DE_LA_LLAVE>
+La estructura de código del archivo Jenkinsfile consta de 
 ```
-<img width="545" alt="workspace" src="images/ssh-command.JPG">
+pipeline {
+    agent any
 
-Al ejecutar el comando se crearan dos archivos. Uno de ellos con extensión .pub cuyo contenido de texto contiene una llave SSH publica. El otro archivos no tiene extensión y contiene la llave SSH privada. Se deben copiar y pegar cada una de ellas en las variables definidas anteriormente.
+    stages {
+        stage('DevOps Schematics') {
+            steps {
+                echo 'Building..'
+            }
+        }
+        
+    }
+}
+```
+Donde, como se puede observar se cuenta con un pipeline con directivas. La directiva **agent** determina el motor de ejecución. En este caso se acepta cualquiera. La directiva **stages** establece un conjunto de etapas. Y por ultimo se tiene la directiva **steps** donde se determinan los pasos de ejecución de la tarea.
 
-Luego de tener estas llaves se agregan a las variables de entrada como se muestra a continuación:
+La conexión de Jenkins a Schematics se usó con ayuda de peticiones HTTP a la API de Schematics con los siguientes comandos dependiendo el sistema operativos
 
-<img alt="SSH" src="images/in-ssh.JPG">
+Linux:
+```
+curl --request _(POST, PUT, GET)_ --url _URL_ -H _Token de Autorización_ -d _Datos de petición_
+```
+Windows:
+```
+Invoke-RestMethod -Uri _URL_ -Method _(GET-POST-PUT)_ -Headers __Token de Autorización__ -Body _Datos de petición_
+```
 
-En el espacio sobremarcado con rojo se debe pegar el link del repositorio y de ser necesario en la parte de abajo el Token para permisos de acceso. Se presiona el botón sobremarcado con amarillo para adquirir las variables a rellenar. Luego de rellenarlas se debe crear el workspace. En caso de realizar el procedimiento de forma correcta se contará con la siguiente pestaña:
+ 
 
-<img width="945" alt="workspace" src="images/workspace1.JPG">
-
-Se debe generar el plan con el botón que aparece en pantalla y de generarse correctamente se podrá aplicar el plan. _Solo hasta aplicar el plan se va a generar facturación_
-
-## Resultados  :computer: 
-
-## Referencias  :mag: 
-
-Encuentre información sobre terraform en IBM cloud en: [Managing IBM Cloud resources with Terraform](https://cloud.ibm.com/docs/terraform?topic=terraform-manage_resources)
+Encuentre información sobre Jenkins en: [Jenkins documentation](https://www.jenkins.io/doc/)
 <br>
-Encuentre información sobre Puppet en: [Learn Puppet ](https://puppet.com/docs/puppet/latest/puppet_index.html)
+Encuentre información sobre IBM Cloud Schematics API en: [IBM Cloud Schematics API](https://cloud.ibm.com/apidocs/schematics)
 <br>
 
 ## Autores :black_nib:
