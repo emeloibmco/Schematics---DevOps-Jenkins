@@ -70,8 +70,6 @@ Windows:
 Invoke-RestMethod -Uri _URL_ -Method _(GET-POST-PUT)_ -Headers __Token de Autorización__ -Body _Datos de petición_
 ```
 
- 
-
 Encuentre información sobre Jenkins en: [Jenkins documentation](https://www.jenkins.io/doc/)
 <br>
 Encuentre información sobre IBM Cloud Schematics API en: [IBM Cloud Schematics API](https://cloud.ibm.com/apidocs/schematics)
