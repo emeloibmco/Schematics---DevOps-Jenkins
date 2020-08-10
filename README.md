@@ -17,7 +17,7 @@ Una vez creado el proyecto se debe vincular al respositorio de GitHub donde se e
 
 <img width="545" alt="cred" src="Assets/set-credentials.JPG"> 
 
-Como se puede ver se deben añadir las credenciales del usuario en GitHub y luego de ello ingresar la dirección del repositorio. Para añadir las credenciales de la cuenta de GitHub se debe rellenar la información de **Username** y **Password** como se muestra en la siguiente imagen:
+Como se puede ver se deben añadir las credenciales del usuario en GitHub y luego de ello ingresar la dirección del repositorio. Para añadir las credenciales de la cuenta de GitHub se debe especificar la información de **Username** y **Password** como se muestra en la siguiente imagen:
 
 <img width="545" alt="github credentials" src="Assets/github-credentials.JPG">
 
@@ -26,7 +26,7 @@ Una vez creado el proyecto se puede observar un _DASHBOARD_ como aparece en la s
 <img width="545" alt="dash_jenkins" src="Assets/dash-jenkins.JPG">
 
 En donde se selecciona el **commit** master que contiene el archivo Jenkinsfile para la ejecución de tareas.
-Una vez alli se observa el _DASHBOARD_ del **master** como se observa a continuación:
+Una vez alli se observa el _DASHBOARD_ del **master**:
 
 <img width="545" alt="dash_workspace" src="Assets/dash-master.JPG">
 
@@ -34,7 +34,7 @@ Para ejecutar el PIPELINE se selecciona **Build with Paramenters**, luego de ell
 
 <img width="545" alt="dash_workspace" src="Assets/select_os.JPG">
 
-Se debe selecciónar el sistema operativo sobre el cual la herramienta Jenkins esta instalado. Tambien se debe ingresar el IAM Token el cual se obtiene con el siguiente comando:
+Se debe selecciónar el sistema operativo sobre el cual la herramienta Jenkins esta instalado. También se debe ingresar el IAM Token el cual se obtiene dentro de su CLI con el siguiente comando:
 ```
 ibmcloud iam oauth-tokens
 ```
@@ -58,7 +58,15 @@ pipeline {
 ```
 El Jenkinsfile cuenta con un pipeline con diferentes directivas. La directiva **agent** determina el motor de ejecución. En este caso se acepta cualquiera. La directiva **stages** establece un conjunto de etapas. Y por ultimo se tiene la directiva **steps** donde se determinan los pasos de ejecución de la tarea.
 
-La conexión de Jenkins con Schematics se hizo mediante la API de Schematics con los siguientes comandos dependiendo el sistema operativo elegido en pasos anteriores:
+La conexión de Jenkins con Schematics se hizo mediante la API de Schematics. Las peticiones y el código correspondiente se encuentran en el archivo **Jenkinsfile** del presente repositorio; estas peticiones responden a los pasos necesarios para aprovisonar un recurso dentro de Schematics (que se encuentran referenciados en la [Documentación](https://cloud.ibm.com/docs/schematics?topic=schematics-getting-started)) de Schematics y los cuales son:
+
+1). Crear un workspace
+
+2). Crear un plan
+
+3). Aplicar un plan
+
+La estructura general de las peticiones a la API de Schematics se encuentra a continuación:
 
 Linux:
 ```
@@ -69,7 +77,17 @@ Windows:
 Invoke-RestMethod -Uri _URL_ -Method _(GET-POST-PUT)_ -Headers __Token de Autorización__ -Body _Datos de petición_
 ```
 
+## 3. Resultados
 
+Al ejecutar un nuevo Pipeline puede encontrar la descripción del proceso al ingresar a la información de los logs. También puede corroborar que el proceso fue exitoso al ingresar a la lista de workspaces, donde se creará el workspace "jenkins".
+
+<img width="745" alt="dash_workspace" src="Assets/workspaces.png">
+
+También puede ingresar a la interfaz de Skytap donde ecnontrará las dos máquinas aprovisionadas, con las características especificadas dentro de la [plantilla de Terraform](https://github.com/emeloibmco/Skytap-DevOps-Terraform) usada en la guía.
+
+<img width="745" alt="dash_workspace" src="Assets/skytap.png">
+
+## Referencias
 Encuentre información sobre Jenkins en: [Jenkins documentation](https://www.jenkins.io/doc/)
 <br>
 Encuentre información sobre IBM Cloud Schematics API en: [IBM Cloud Schematics API](https://cloud.ibm.com/apidocs/schematics)
