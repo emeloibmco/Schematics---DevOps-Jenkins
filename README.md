@@ -29,7 +29,7 @@ Para ejecutar el Pipeline, seleccione **Build with Paramenters**, luego de ello 
 
 <img width="545" alt="dash_workspace" src="Assets/select_os.JPG">
 
-## 2. Jenkisfile :page_with_curl:	
+## Jenkisfile :page_with_curl:	
 
 La estructura de código del archivo Jenkinsfile consta de: 
 
@@ -73,7 +73,7 @@ Windows:
 Invoke-RestMethod -Uri <URL> -Method <GET-POST-PUT> -Headers <Token_de_Autorización> -Body <Datos_de_petición>
 ```
 
-## 3. Resultados
+## Resultados
 
 Al ejecutar un nuevo Pipeline puede encontrar la descripción del proceso al ingresar a la información de los logs. También puede corroborar que el proceso fue exitoso al ingresar a la lista de workspaces, donde se creará el workspace "jenkins".
 
